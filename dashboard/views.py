@@ -7,6 +7,7 @@ import requests
 import wikipedia
 from wikipedia.exceptions import PageError, DisambiguationError
 from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -16,6 +17,7 @@ def home(request):
     return render(request, 'dashboard/home.html')
 
 # Notes
+@login_required
 def notes(request):
     if request.method == 'POST':
         form = NotesForm(request.POST)
@@ -31,6 +33,7 @@ def notes(request):
     return render(request, 'dashboard/notes.html', context)
 
 # Delete Notes
+@login_required
 def delete_notes(request, pk=None):
     Notes.objects.get(id=pk).delete()
     messages.success(request, f'Notes deleted from {request.user.username} successfully')
@@ -40,6 +43,7 @@ class NotesDetailView(generic.DetailView):
     model = Notes
 
 # Homework
+@login_required
 def homework(request):
     if request.method == 'POST':
         form = HomeworkForm(request.POST)
@@ -92,6 +96,7 @@ def delete_homework(request, pk):
 
 
 # YouTube Section
+@login_required
 def youtube(request):
     if request.method == 'POST':
         form = DashboardForm(request.POST)
@@ -126,6 +131,7 @@ def youtube(request):
     return render(request, 'dashboard/youtube.html',context)
 
 # Todo Function
+@login_required
 def todo(request):
     if request.method == 'POST':
         form = TodoForm(request.POST)
@@ -179,6 +185,7 @@ def delete_todo(request, pk):
 
 
 # Books Section
+@login_required
 def books(request):
     if request.method == 'POST':
         form = DashboardForm(request.POST)
@@ -210,6 +217,7 @@ def books(request):
     return render(request, 'dashboard/books.html', context)
 
 # Dictonary Section
+@login_required
 def dictionary(request):
     if request.method == 'POST':
         form = DashboardForm(request.POST)
@@ -245,6 +253,7 @@ def dictionary(request):
 
 
 # Wikipedia Section
+@login_required
 def wiki(request):
     if request.method == 'POST':
         form = DashboardForm(request.POST)
@@ -286,6 +295,7 @@ def wiki(request):
 
 
 # Conversion Section
+@login_required
 def conversion(request):
     if request.method == 'POST':
         form = ConversionForm(request.POST)
@@ -370,6 +380,7 @@ def register(request):
 
 
 # Profile
+@login_required
 def profile(request):
     homework = Homework.objects.filter(is_finished = False, user = request.user)
     todo = Todo.objects.filter(is_finished = False, user=request.user)
