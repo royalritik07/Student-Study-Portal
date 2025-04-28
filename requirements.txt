@@ -121,7 +121,7 @@ python-dateutil==2.9.0.post0
 pytweening==1.2.0
 pytz==2024.1
 pywhatkit==5.4
-pywin32==305
+pywin32==306
 pyzmq==26.0.3
 queuelib==1.7.0
 referencing==0.35.1
