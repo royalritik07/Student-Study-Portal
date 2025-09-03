@@ -1,5 +1,3 @@
-setuptools>=75.0.0
-wheel>=0.45.0
 anyio==4.10.0
 asgiref==3.9.1
 beautifulsoup4==4.13.5
